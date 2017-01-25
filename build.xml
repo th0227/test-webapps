@@ -1,0 +1,40 @@
+<project name="test-webapp" basedir=".">
+        <target name="init">
+                <property name="name"    value="test-webapp"/>
+                <property name="title"   value="test-webapp"/>
+                <property name="package" value="com.beeete2.*"/>
+                <property name="version" value="1.0.0"/>
+                
+                <property name="component-propfile" value="${basedir}/build.properties"/>
+                <property file="${component-propfile}"/>
+                
+                <property name="build.dir"              value="${basedir}/target/dist"/>
+                <property name="build.classes.dir"      value="${build.dir}/classes"/>
+                <property name="build.production.dir"   value="${build.dir}/ROOT"/>
+                
+                <property name="src.lib"               value="${basedir}/src/lib" />
+                <property name="src.main.lib"          value="${basedir}/src/main/lib" />
+                <property name="src.main.webapp" value="${basedir}/src/main/webapp" />
+                
+                <property name="javac.debug"             value="on"/>
+                <property name="javac.optimize"          value="false"/>
+                <property name="javac.source"            value="1.7" />
+                <property name="javac.encoding"          value="UTF-8" />
+                <property name="javac.includeantruntime" value="false" />
+                
+                <property name="main.java.dir"      value="${basedir}/src/main/java" />
+                <property name="main.resources.dir" value="${basedir}/src/main/resources" />
+        </target>
+
+        <target name="war" depends="init">
+            <delete dir="${build.production.dir}" />
+            <mkdir dir="${build.production.dir}" />
+            <copy todir="${build.production.dir}" overwrite="true">
+                <fileset dir="${src.main.webapp}" />
+            </copy>
+            
+            <property environment="env" />
+            <zip destfile="${build.dir}/ROOT.war" basedir="${build.production.dir}"/>
+        </target>
+
+</project>
