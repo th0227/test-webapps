@@ -15,6 +15,7 @@
                 <property name="src.lib"               value="${basedir}/src/lib" />
                 <property name="src.main.lib"          value="${basedir}/src/main/lib" />
                 <property name="src.main.webapp" value="${basedir}/src/main/webapp" />
+                <property name="src.deploy"            value="/var/lib/tomcat/webapps" />
                 
                 <property name="javac.debug"             value="on"/>
                 <property name="javac.optimize"          value="false"/>
@@ -35,6 +36,12 @@
             
             <property environment="env" />
             <zip destfile="${build.dir}/ROOT.war" basedir="${build.production.dir}"/>
+        </target>
+
+        <target name="deploy" depends="init">
+            <copy todir="${src.deploy}" overwrite="true">
+                <fileset dir="${build.dir}/ROOT.war" />
+            </copy>
         </target>
 
 </project>
