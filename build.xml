@@ -41,7 +41,7 @@
 
         <target name="deploy" depends="init">
             <copy todir="${src.deploy}" overwrite="true">
-                <fileset dir="${build.dir}/ROOT.war" />
+                <fileset dir="${build.dir}" />
             </copy>
         </target>
 
